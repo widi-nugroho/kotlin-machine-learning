@@ -11,7 +11,7 @@ class KnnClassificator(val k:Int) {
     fun computeDistance(input:DataClassificator, data:List<DataClassificator>):List<Pair<Double,DataClassificator>>{
         var res= mutableListOf<Pair<Double,DataClassificator>>()
         for (i in data){
-            var dist=Distance.euclidDistance(i,input)
+            var dist=Distance.euclidDistanceClassificator(i,input)
             res.add(Pair(dist,i))
         }
         return res.sortedWith(compareBy({it.first}))
