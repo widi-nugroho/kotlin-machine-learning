@@ -1,0 +1,4 @@
+package knn
+
+object Distance {
+}
