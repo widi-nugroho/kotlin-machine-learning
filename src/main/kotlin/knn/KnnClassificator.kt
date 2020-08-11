@@ -40,13 +40,16 @@ class KnnClassificator(val k:Int) {
     }
 }
 fun main(){
-    var t=DataAccess.loadcsv("/home/widi/projects/kotlin-machine-learning/src/main/resources/iris.data")
-    var k1=KnnClassificator(100)
-    var t2=k1.getKNearestNeighbour(k1.computeDistance(t[0],t))
-    println(k1.kNearestNeighbourGroupedByLabel(t2))
-    //for (i in 0..t.size-1){
-    //    println(t[0].output+"dist: "+k1.computeDistance(t[0],t)[i].first+"datanya: "+k1.computeDistance(t[0],t)[i].second.output)
-    //}
-    var test= listOf<Double>(4.9,3.0,1.4,0.2)
-    println(k1.classify(test,t))
+    //var t=DataAccess.loadcsv("/home/widi/projects/kotlin-machine-learning/src/main/resources/iris.data")
+    //var k1=KnnClassificator(100)
+    //var t2=k1.getKNearestNeighbour(k1.computeDistance(t[0],t))
+    //println(k1.kNearestNeighbourGroupedByLabel(t2))
+    //var test= listOf<Double>(4.9,3.0,1.4,0.2)
+    //println(k1.classify(test,t))
+    var c2=DataAccess.loadWineData("/home/widi/projects/kotlin-machine-learning/src/main/resources/wine.data")
+    var k2=KnnClassificator(3)
+    var test2= listOf<Double>(11.41,.74,2.5,21.0,88.0,2.48,2.01,.42,1.44,3.08,1.1,2.31,434.0)
+    println(k2.classify(test2,c2))
+    var t3=k2.computeDistance(c2[0],c2)
+    println(t3[0].first)
 }
