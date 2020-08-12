@@ -7,7 +7,11 @@ open class Record {
         this.features=features
         this.output=output
     }
-
+    fun coordinate(): Pair<Double, Double> {
+        var x=(features["sepal_L"]!!+features["petal_L"]!!)/2
+        var y=(features["sepal_W"]!!+features["petal_W"]!!)/2
+        return Pair(x,y)
+    }
 }
 
 class Centroid :Record {

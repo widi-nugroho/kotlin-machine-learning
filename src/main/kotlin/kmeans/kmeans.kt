@@ -1,7 +1,11 @@
 package kmeans
 
+import org.math.plot.Plot2DPanel
+import java.awt.Color
 import kotlin.math.sqrt
 import kotlin.random.Random
+import javax.swing.JFrame
+
 class Kmeans(){
     var k:Int=0
     constructor(k:Int):this(){
@@ -56,6 +60,29 @@ class Kmeans(){
             updateCentroids(lr)
         }
     }
+    fun plotting(datas:List<Record>){
+        var plot= Plot2DPanel()
+        val frame = JFrame("Kmeans Iris Plot")
+        frame.setSize(600, 600)
+        var xd= mutableListOf<Double>()
+        var yd= mutableListOf<Double>()
+        var xc= mutableListOf<Double>()
+        var yc= mutableListOf<Double>()
+        for (i in datas){
+            var(x1,y1)=i.coordinate()
+            xd.add(x1)
+            yd.add(y1)
+        }
+        for (i in centroids){
+            var(x1,y1)=i.coordinate()
+            xc.add(x1)
+            yc.add(y1)
+        }
+        plot.addScatterPlot("Datas plot", Color.BLACK,xd.toDoubleArray(),yd.toDoubleArray())
+        plot.addScatterPlot("Centroids plot", Color.RED,xc.toDoubleArray(),yc.toDoubleArray())
+        frame.contentPane=plot
+        frame.isVisible=true
+    }
 }
 
 
@@ -67,9 +94,10 @@ fun main(){
     for(i in iris.centroids){
         println(i.features)
     }
+    iris.plotting(irisRecord)
     iris.train(0.2,100,irisRecord)
     for(i in iris.centroids){
         println(i.features)
     }
-
+    iris.plotting(irisRecord)
 }
