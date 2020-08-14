@@ -8,6 +8,9 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven{
+        url"https://jitpack.io"
+    }
 }
 
 dependencies {
@@ -15,6 +18,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation("com.github.doyaaaaaken:kotlin-csv-jvm:0.10.4")
     implementation  "com.github.yannrichet:JMathPlot:1.0.1"
+    compile group: 'com.github.lejon.T-SNE-Java', name: 'tsne', version: 'v2.5.0'
 }
 
 compileKotlin {
