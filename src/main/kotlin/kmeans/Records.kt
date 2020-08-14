@@ -1,5 +1,7 @@
 package kmeans
 
+import kotlin.math.sqrt
+
 open class Record {
     var output=""
     var features= mutableMapOf<String,Double>()
@@ -11,6 +13,15 @@ open class Record {
         var x=(features["sepal_L"]!!+features["petal_L"]!!)/2
         var y=(features["sepal_W"]!!+features["petal_W"]!!)/2
         return Pair(x,y)
+    }
+    fun euclidDistance(b:Record):Double{
+        var res=0.0
+        for ((k,v) in this.features){
+            var selisih=this.features[k]!!-b.features[k]!!
+            selisih=selisih*selisih
+            res+=selisih
+        }
+        return sqrt(res)
     }
 }
 
@@ -56,5 +67,13 @@ class Centroid :Record {
         res["petal_L"]=avg3
         res["petal_W"]=avg4
         return res
+    }
+    fun max_distance_to_centroids(): Double {
+        var res= mutableListOf<Double>()
+        for (i in members){
+            var d=i.euclidDistance(this)
+            res.add(d)
+        }
+        return res.sorted()[res.lastIndex]
     }
 }

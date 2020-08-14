@@ -83,6 +83,30 @@ class Kmeans(){
         frame.contentPane=plot
         frame.isVisible=true
     }
+    fun min_distance_between_centroids(): Double {
+        var res= mutableListOf<Double>()
+        for (i in 0..centroids.size-1){
+            for (j in i..centroids.size-1){
+                if (i!=j){
+                    var d=euclidDistance(centroids[i],centroids[j])
+                    res.add(d)
+                }
+            }
+        }
+        return res.sorted()[0]
+    }
+    fun max_distance_centroids(): Double {
+        var res= mutableListOf<Double>()
+        for (i in centroids){
+            res.add(i.max_distance_to_centroids())
+        }
+        return res.sorted()[res.lastIndex]
+    }
+    fun dunn_index(): Double {
+        var max=max_distance_centroids()
+        var min=min_distance_between_centroids()
+        return min/max
+    }
 }
 
 
@@ -100,4 +124,11 @@ fun main(){
         println(i.features)
     }
     iris.plotting(irisRecord)
+    /*iris.min_distance_between_centroids()
+    var dis=iris.min_distance_between_centroids()
+    println("         "+dis)
+    iris.centroids[0].max_distance_to_centroids()
+    var t=iris.centroids[0].max_distance_to_centroids()
+    println("              "+t)*/
+    println(iris.dunn_index())
 }
