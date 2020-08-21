@@ -23,9 +23,9 @@ object DataAccess {
         csvReader().open(filename){
             readAllAsSequence().forEach { row ->
                 var o=row[0].toInt()
-                var i= mutableListOf<Double>()
+                var i= mutableListOf<Float>()
                 for (p in 1..row.size-1){
-                    i.add(row[p].toDouble())
+                    i.add(row[p].toFloat())
                 }
                 var sd= WineRecord(i,o)
                 res.add(sd)
