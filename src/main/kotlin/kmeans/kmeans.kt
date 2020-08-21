@@ -17,7 +17,6 @@ class Kmeans(){
     }
     var centroids= mutableListOf<Centroid>()
     fun initCentroids(records:List<Record>){
-        var res= mutableListOf<Centroid>()
         for (i in 0..k-1){
             var r=records[Random.nextInt(0,records.size-1)]
             var r2=Centroid(r.features,r.output)
@@ -28,13 +27,13 @@ class Kmeans(){
         var res=0.0
         for ((k,v) in a.features){
             var selisih=a.features[k]!!-b.features[k]!!
-            selisih=selisih*selisih
+            selisih *= selisih
             res+=selisih
         }
         return sqrt(res)
     }
     fun findWinner(a:Record):Int{
-        var dist= mutableListOf<Pair<Int,Double>>()
+        val dist= mutableListOf<Pair<Int,Double>>()
         for (i in 0..centroids.size-1){
             dist.add(Pair(i, euclidDistance(a,centroids[i])))
         }
@@ -64,7 +63,7 @@ class Kmeans(){
             updateCentroids(lr)
         }
     }
-    fun plotting(datas:List<Record>){
+    /*fun plotting(datas:List<Record>){
         var plot= Plot2DPanel()
         val frame = JFrame("Kmeans Iris Plot")
         frame.setSize(600, 600)
@@ -87,6 +86,7 @@ class Kmeans(){
         frame.contentPane=plot
         frame.isVisible=true
     }
+    */
     fun min_distance_between_centroids(): Double {
         var res= mutableListOf<Double>()
         for (i in 0..centroids.size-1){

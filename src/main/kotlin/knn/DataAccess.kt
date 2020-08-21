@@ -1,4 +1,7 @@
 package knn
+
+import ai.djl.ndarray.NDManager
+import ann.WineRecord
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 object DataAccess {
     fun loadcsv(filename:String):List<DataClassificator>{
@@ -9,6 +12,23 @@ object DataAccess {
                 var input= listOf(row[0].toDouble(),row[1].toDouble(),row[2].toDouble(),row[3].toDouble())
                 var satudata=DataClassificator(input,output)
                 res.add(satudata)
+            }
+        }
+        return res
+    }
+    fun WineList(filename: String): MutableList<WineRecord> {
+        var res= mutableListOf<WineRecord>()
+        var input= mutableListOf<Double>()
+        var output= mutableListOf<Double>()
+        csvReader().open(filename){
+            readAllAsSequence().forEach { row ->
+                var o=row[0].toInt()
+                var i= mutableListOf<Double>()
+                for (p in 1..row.size-1){
+                    i.add(row[p].toDouble())
+                }
+                var sd= WineRecord(i,o)
+                res.add(sd)
             }
         }
         return res
